@@ -1,8 +1,8 @@
 from rest_framework import serializers
-from .models import Sale
+from .models import Order
 
 
 class SaleSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Sale
+        model = Order
         fields = ('order_id', 'itemsTotal', 'saleTotal', 'date')

@@ -36,3 +36,8 @@ body
     margin-left : 20px;
 }
 
+.card-shadow
+{
+    box-shadow: 0 0 10px 0 rgba(0, 0, 100, 0.27);
+}
+

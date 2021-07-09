@@ -1,12 +1,12 @@
 from django.shortcuts import render
-from .models import OrderItem, Sale
+from .models import OrderItem, Order
 import datetime
 from rest_framework import viewsets
 from .serializers import SaleSerializer
 from .filters import SaleFilter
 
 def dashboard_view(request):
-    orders = Sale.objects.all()
+    orders = Order.objects.all()
     items = OrderItem.objects.all()
 
     filter = SaleFilter(request.GET, queryset = orders)    
@@ -17,5 +17,5 @@ def dashboard_view(request):
 
 
 class JsonView(viewsets.ModelViewSet):
-    queryset = Sale.objects.all()
+    queryset = Order.objects.all()
     serializer_class = SaleSerializer

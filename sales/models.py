@@ -17,7 +17,7 @@ class Item(models.Model):
         return self.item_name
 
 
-class Sale(models.Model):
+class Order(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null = True)
     date = models.DateTimeField(auto_now_add=True)
     order_id = models.CharField(max_length=20)
@@ -42,7 +42,7 @@ class Sale(models.Model):
 
 class OrderItem(models.Model):
     item = models.ForeignKey(Item, on_delete=models.SET_NULL, null = True)
-    order = models.ForeignKey(Sale, on_delete=models.SET_NULL, null = True)
+    order = models.ForeignKey(Order, on_delete=models.SET_NULL, null = True)
     quantity = models.IntegerField(default = 0)
     date_added = models.DateTimeField(auto_now_add=True)
 
