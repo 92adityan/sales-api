@@ -3,14 +3,16 @@ from .models import OrderItem, Sale
 import datetime
 from rest_framework import viewsets
 from .serializers import SaleSerializer
+from .filters import SaleFilter
 
 def dashboard_view(request):
     orders = Sale.objects.all()
     items = OrderItem.objects.all()
-    context = {'orders' : orders, 'items' : items}
 
-    if request.method == 'GET':
-        pass
+    filter = SaleFilter(request.GET, queryset = orders)    
+    orders = filter.qs
+
+    context = {'orders' : orders, 'items' : items, 'filter' : filter}
     return render(request, 'dashboard.html', context)
 
 
