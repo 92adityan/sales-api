@@ -1,12 +1,13 @@
 from django.shortcuts import render
-from .models import Sale
+from .models import OrderItem, Sale
 import datetime
 from rest_framework import viewsets
 from .serializers import SaleSerializer
 
 def dashboard_view(request):
-    sales = Sale.objects.all()
-    context = {'sales' : sales}
+    orders = Sale.objects.all()
+    items = OrderItem.objects.all()
+    context = {'orders' : orders, 'items' : items}
 
     if request.method == 'GET':
         pass

@@ -1,20 +1,20 @@
 <table class="table table-striped">
     <thead>
     <tr>
-        <th scope="col">Product Name</th>
-        <th scope="col">Quantity</th>
-        <th scope="col">Date Purchased</th>
-        <th scope="col">Total amount</th>
+        <th scope="col">Order ID</th>
+        <th scope="col">Total Items</th>
+        <th scope="col">Total Price</th>
+        <th scope="col">Date purchased</th>
     </tr>
     </thead>
     <tbody>
-    {% for sale in sales %}
+        {% for order in orders %}
         <tr>
-            <td>{{ sale.item.item_name }}</td>
-            <td>{{ sale.quantity }}</td>
-            <td>{{ sale.getDate }}</td>
-            <td>{{ sale.totalAmount }}</td>
+            <td>{{ order.order_id }}</td>
+            <td>{{ order.itemsTotal }}</td>
+            <td>{{ order.saleTotal }}</td>
+            <td>{{ order.date|date }}</td>
         </tr>
-    {% endfor %}
+        {% endfor %}
     </tbody>
 </table>
