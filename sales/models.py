@@ -16,4 +16,7 @@ class Sale(models.Model):
         return str(self.id)
     
     def getDate(self):
-        return self.date.strftime('%B/%d/%Y')
+        return self.date.strftime('%d/%m/%Y')
+
+    def totalAmount(self):
+        return self.item.item_price * self.quantity

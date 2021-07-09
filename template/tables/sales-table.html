@@ -4,6 +4,7 @@
         <th scope="col">Product Name</th>
         <th scope="col">Quantity</th>
         <th scope="col">Date Purchased</th>
+        <th scope="col">Total amount</th>
     </tr>
     </thead>
     <tbody>
@@ -12,6 +13,7 @@
             <td>{{ sale.item.item_name }}</td>
             <td>{{ sale.quantity }}</td>
             <td>{{ sale.getDate }}</td>
+            <td>{{ sale.totalAmount }}</td>
         </tr>
     {% endfor %}
     </tbody>
