@@ -1,0 +1,38 @@
+/*
+global variables
+*/
+:root 
+{
+    --primary-color : #AE00CA;
+    --secondary-color : #F45C85;
+    --btn-color : #FEEE12;
+}
+
+body
+{
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.btn-custom
+{
+    background-color: var(--btn-color);
+    color : black;
+    border-radius: 15px;
+    margin-left : auto;
+    margin-right : 10px;
+}
+
+/*  Navbar  */
+
+.navbar-custom
+{
+    background-color : var(--primary-color);
+}
+
+.navbar-brand
+{
+    color : white;
+    text-decoration: none;
+    margin-left : 20px;
+}
+
