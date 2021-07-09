@@ -6,6 +6,6 @@ router =routers.DefaultRouter()
 router.register('sales', JsonView)
 
 urlpatterns = [
-    path('dashboard/', dashboard_view, name = 'dashboard'),
+    path('', dashboard_view, name = 'dashboard'),
     path('api/', include(router.urls))
 ]

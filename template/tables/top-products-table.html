@@ -7,9 +7,12 @@
     </tr>
     </thead>
     <tbody>
+    {% for orderitem in items %}
         <tr>
-            <td></td>
+            <td>{{ orderitem.item.item_name }}</td>
+            <td>{{ orderitem.quantity }}</td>
+            <td>{{ orderitem.date_added }}</td>
         </tr>
-
+    {% endfor %}
     </tbody>
 </table>

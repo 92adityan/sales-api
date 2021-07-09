@@ -46,6 +46,9 @@ class OrderItem(models.Model):
     quantity = models.IntegerField(default = 0)
     date_added = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        ordering = ['-quantity']
+
     def __str__(self):
         return str(self.id)
 
