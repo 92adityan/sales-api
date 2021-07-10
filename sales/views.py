@@ -12,7 +12,11 @@ def dashboard_view(request):
     item_dict = {}
     for orderitem in orderitems:
         item, quantity = orderitem.item_quantity()
-        item_dict[item] = quantity
+        if item in item_dict:
+            previous_quantity = item_dict[item]
+            item_dict[item] = quantity + previous_quantity
+        else:
+            item_dict[item] = quantity
 
     sorted_dict = sorted(item_dict.items(), key=lambda kv: kv[1], reverse=True)
     item_dict =dict(sorted_dict)
