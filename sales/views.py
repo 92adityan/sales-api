@@ -7,12 +7,21 @@ from .filters import SaleFilter
 
 def dashboard_view(request):
     orders = Order.objects.all()
-    items = OrderItem.objects.all()
+    orderitems = OrderItem.objects.all()
 
+    item_dict = {}
+    for orderitem in orderitems:
+        item, quantity = orderitem.item_quantity()
+        item_dict[item] = quantity
+
+    sorted_dict = sorted(item_dict.items(), key=lambda kv: kv[1], reverse=True)
+    item_dict =dict(sorted_dict)
+    
+    print(item_dict)
     filter = SaleFilter(request.GET, queryset = orders)    
     orders = filter.qs
 
-    context = {'orders' : orders, 'items' : items, 'filter' : filter}
+    context = {'orders' : orders, 'items' : orderitems, 'filter' : filter, 'item_dict' : item_dict}
     return render(request, 'dashboard.html', context)
 
 

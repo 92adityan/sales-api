@@ -3,15 +3,13 @@
     <tr>
         <th scope="col">Product Name</th>
         <th scope="col">Quantity</th>
-        <th scope="col">Date Purchased</th>
     </tr>
     </thead>
     <tbody>
-    {% for orderitem in items %}
+    {% for key, val in item_dict.items  %}
         <tr>
-            <td>{{ orderitem.item.item_name }}</td>
-            <td>{{ orderitem.quantity }}</td>
-            <td>{{ orderitem.date_added }}</td>
+            <td>{{ key }}</td>
+            <td>{{ val }}</td>
         </tr>
     {% endfor %}
     </tbody>
