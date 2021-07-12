@@ -27,6 +27,10 @@ def dashboard_view(request):
     if date_query != '' and date_query is not None:
         orders = Order.objects.filter(date = date_query)
     
+    # search by order ID
+    order_id_query = request.GET.get('order_id')
+    if order_id_query != '' and order_id_query is not None:
+        orders = Order.objects.filter(order_id__iexact = order_id_query)
     
     context = {'orders' : orders, 'items' : orderitems, 'filter' : filter, 'item_dict' : item_dict}
     return render(request, 'dashboard.html', context)
