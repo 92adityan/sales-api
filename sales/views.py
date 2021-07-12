@@ -1,13 +1,16 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import OrderItem, Order
-import datetime
+from django.http import HttpResponseRedirect
 from rest_framework import viewsets
 from .serializers import SaleSerializer
-
+from .forms import OrderForm, OrderItemForm
 
 def dashboard_view(request):
+
     orderitems = OrderItem.objects.all()
     orders = Order.objects.all()
+    order_form = OrderForm()
+    order_item_form = OrderItemForm()
 
     # top sold products
     item_dict = {}
@@ -32,8 +35,25 @@ def dashboard_view(request):
     if order_id_query != '' and order_id_query is not None:
         orders = Order.objects.filter(order_id__iexact = order_id_query)
     
-    context = {'orders' : orders, 'items' : orderitems, 'filter' : filter, 'item_dict' : item_dict}
+    context = {'orders' : orders, 'items' : orderitems, 'filter' : filter, 
+    'item_dict' : item_dict, 'order_form' : order_form, 'order_item_form' : order_item_form}
+ 
     return render(request, 'dashboard.html', context)
+
+
+def create_order(request):
+    if request.method == 'POST':
+        order_form = OrderForm(request.POST)
+        if order_form.is_valid():
+            order_form.save()
+            return HttpResponseRedirect('/')
+
+def create_order_item(request):
+    if request.method == 'POST':
+        order_item_form = OrderItemForm(request.POST)
+        if order_item_form.is_valid():
+            order_item_form.save()
+            return HttpResponseRedirect('/')
 
 
 class JsonView(viewsets.ModelViewSet):

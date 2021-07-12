@@ -33,6 +33,38 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card card-shadow mt-2">
+                <div class="card-body">
+                    <h4 class="card-title">
+                        Create Order
+                    </h4>
+                    <hr>
+                    <form action="create-order/" method = "POST">
+                    {% csrf_token %}
+                    {{ order_form|crispy }}
+                    <button class="btn btn-custom mt-2" type = "submit">Create</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card card-shadow mt-2">
+                <div class="card-body">
+                    <h4 class="card-title">
+                        Create Order Item
+                    </h4>
+                    <hr>
+                    <form action="create-order-item/" method = "POST">
+                    {% csrf_token %}
+                    {{ order_item_form|crispy }}
+                    <button class="btn btn-custom mt-2" type = "submit">Create</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock content %}
 
