@@ -3,12 +3,13 @@ from .models import OrderItem, Order
 import datetime
 from rest_framework import viewsets
 from .serializers import SaleSerializer
-from .filters import SaleFilter
+
 
 def dashboard_view(request):
-    orders = Order.objects.all()
     orderitems = OrderItem.objects.all()
+    orders = Order.objects.all()
 
+    # top sold products
     item_dict = {}
     for orderitem in orderitems:
         item, quantity = orderitem.item_quantity()
@@ -20,11 +21,13 @@ def dashboard_view(request):
 
     sorted_dict = sorted(item_dict.items(), key=lambda kv: kv[1], reverse=True)
     item_dict =dict(sorted_dict)
-    
-    print(item_dict)
-    filter = SaleFilter(request.GET, queryset = orders)    
-    orders = filter.qs
 
+    # search by date  
+    date_query = request.GET.get('date')
+    if date_query != '' and date_query is not None:
+        orders = Order.objects.filter(date = date_query)
+    
+    
     context = {'orders' : orders, 'items' : orderitems, 'filter' : filter, 'item_dict' : item_dict}
     return render(request, 'dashboard.html', context)
 

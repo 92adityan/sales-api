@@ -19,7 +19,7 @@ class Item(models.Model):
 
 class Order(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null = True)
-    date = models.DateTimeField(auto_now_add=True)
+    date = models.DateField()
     order_id = models.CharField(max_length=20)
     
     def __str__(self):
@@ -42,9 +42,9 @@ class Order(models.Model):
 
 class OrderItem(models.Model):
     item = models.ForeignKey(Item, on_delete=models.SET_NULL, null = True)
-    order = models.ForeignKey(Order, on_delete=models.SET_NULL, null = True)
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, null = True)
     quantity = models.IntegerField(default = 0)
-    date_added = models.DateTimeField(auto_now_add=True)
+    date_added = models.DateField()
 
     class Meta:
         ordering = ['-quantity']
