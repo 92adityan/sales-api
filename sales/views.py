@@ -1,5 +1,5 @@
-from django.shortcuts import render, redirect
-from .models import OrderItem, Order
+from django.shortcuts import render
+from .models import OrderItem, Order, Customer
 from django.http import HttpResponseRedirect
 from rest_framework import viewsets
 from .serializers import SaleSerializer
@@ -9,9 +9,11 @@ def dashboard_view(request):
 
     orderitems = OrderItem.objects.all()
     orders = Order.objects.all()
+    customers = Customer.objects.all()
+
     order_form = OrderForm()
     order_item_form = OrderItemForm()
-
+    
     # top sold products
     item_dict = {}
     for orderitem in orderitems:
@@ -36,16 +38,16 @@ def dashboard_view(request):
         orders = Order.objects.filter(order_id__iexact = order_id_query)
     
     context = {'orders' : orders, 'items' : orderitems, 'filter' : filter, 
-    'item_dict' : item_dict, 'order_form' : order_form, 'order_item_form' : order_item_form}
+    'item_dict' : item_dict, 'order_item_form' : order_item_form, 'order_form' : order_form}
  
     return render(request, 'dashboard.html', context)
 
 
 def create_order(request):
     if request.method == 'POST':
-        order_form = OrderForm(request.POST)
-        if order_form.is_valid():
-            order_form.save()
+        new_order = OrderForm(request.POST)
+        if new_order.is_valid:
+            new_order.save()
             return HttpResponseRedirect('/')
 
 def create_order_item(request):
